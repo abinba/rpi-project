@@ -2,6 +2,8 @@ import board
 import busio
 import adafruit_bme280.advanced as adafruit_bme280
 
+from core.config import SEA_LEVEL
+
 
 class BME280Censor:
     """
@@ -10,7 +12,7 @@ class BME280Censor:
     def __init__(self):
         i2c = busio.I2C(board.SCL, board.SDA)
         self.bme = adafruit_bme280.Adafruit_BME280_I2C(i2c, 0x76)
-        self.bme.sea_level_pressure = 1010
+        self.bme.sea_level_pressure = SEA_LEVEL
         self.bme.standby_period = adafruit_bme280.STANDBY_TC_500
         self.bme.iir_filter = adafruit_bme280.IIR_FILTER_X16
 

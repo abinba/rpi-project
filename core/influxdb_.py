@@ -2,18 +2,20 @@ import time
 
 from influxdb import InfluxDBClient
 
+from core.config import INFLUXDB_HOST, INFLUXDB_PORT, INFLUXDB_USER, INFLUXDB_PASSWORD, INFLUXDB_DB
 
-class Grafana:
+
+class InfluxDB:
     def __init__(self):
         self.influx_client = InfluxDBClient(
-            host="localhost",
-            port=8086,
-            username="admin",
-            password="admin",
-            database="censors",
+            host=INFLUXDB_HOST,
+            port=INFLUXDB_PORT,
+            username=INFLUXDB_USER,
+            password=INFLUXDB_PASSWORD,
+            database=INFLUXDB_DB,
         )
 
-    def send_data_to_influxdb(self, parameters):
+    def send(self, parameters):
         iso = time.ctime()
         self.influx_client.write_points([
             {
